@@ -14,7 +14,7 @@
             "outputPath": "dist",
             "index": "index.html",
             "main": "main.ts",
-            "tsConfig": "tsconfig.app.json",
+            "tsConfig": "app/tsconfig.app.json",
             "polyfills": "polyfills.ts",
             "stylePreprocessorOptions": {
               "includePaths": ["", "app/styles"]
@@ -220,9 +220,9 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "main": "test.ts",
-            "karmaConfig": "karma.conf.js",
-            "polyfills": "polyfills.ts",
-            "tsConfig": "tsconfig.spec.json",
+            "karmaConfig": "app/karma.conf.js",
+            "polyfills": "app/polyfills.ts",
+            "tsConfig": "app/tsconfig.spec.json",
             "scripts": [],
             "styles": [
               "styles.scss",
@@ -254,7 +254,7 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["tsconfig.app.json", "tsconfig.spec.json"],
+            "tsConfig": ["app/tsconfig.app.json", "app/tsconfig.spec.json"],
             "exclude": [
               "**/node_modules/**"
             ]
