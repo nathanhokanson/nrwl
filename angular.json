@@ -3,43 +3,51 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "clean-nrwl": {
-      "root": "",
-      "sourceRoot": "src",
+    "fox-angular-cli": {
+      "root": ".",
+      "sourceRoot": ".",
       "projectType": "application",
-      "prefix": "app",
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        }
-      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/clean-nrwl",
-            "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "src/tsconfig.app.json",
+            "outputPath": "dist",
+            "index": "index.html",
+            "main": "main.ts",
+            "tsConfig": "tsconfig.app.json",
+            "polyfills": "polyfills.ts",
+            "stylePreprocessorOptions": {
+              "includePaths": ["", "app/styles"]
+            },
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              "assets",
+              "favicon.ico",
+              "FoxIcons.woff2",
+              "CFLogo_Dark.png",
+              "caret.svg",
+              {
+                "glob": "**/*",
+                "input": "fonts",
+                "output": "/assets/fonts"
+              },
+              {
+                "glob": "**/*",
+                "input": "FoxIcons.woff2",
+                "output": "/fonts"
+              }
             ],
             "styles": [
-              "src/styles.scss"
+              "styles.scss",
+              "assets/FoxIcomoonIcons.css",
+              "assets/normalize.css",
+              "assets/eot.css",
+              "assets/woff.css",
+              "assets/woff2.css"
             ],
-            "scripts": [],
-            "es5BrowserSupport": true
+            "scripts": []
           },
           "configurations": {
             "production": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                }
-              ],
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -49,11 +57,106 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
-              "budgets": [
+              "fileReplacements": [
                 {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
+                  "replace": "./environments/environment.ts",
+                  "with": "./environments/environment.prod.ts"
+                }
+              ]
+            },
+            "dev": {
+              "fileReplacements": [
+                {
+                  "replace": "./environments/environment.ts",
+                  "with": "./environments/environment.ts"
+                }
+              ]
+            },
+            "test": {
+              "fileReplacements": [
+                {
+                  "replace": "./environments/environment.ts",
+                  "with": "./environments/environment.test.ts"
+                }
+              ]
+            },
+            "vm1": {
+              "fileReplacements": [
+                {
+                  "replace": "./environments/environment.ts",
+                  "with": "./environments/environment.den-dev-vm-1.ts"
+                }
+              ]
+            },
+            "vm1-lite": {
+              "fileReplacements": [
+                {
+                  "replace": "./environments/environment.ts",
+                  "with": "./environments/environment.den-dev-vm-1-hmr.ts"
+                }
+              ]
+            },
+            "vm1-hmr": {
+              "fileReplacements": [
+                {
+                  "replace": "./environments/environment.ts",
+                  "with": "./environments/environment.den-dev-vm-1-hmr.ts"
+                }
+              ]
+            },
+            "gluu": {
+              "fileReplacements": [
+                {
+                  "replace": "./environments/environment.ts",
+                  "with": "./environments/environment.gluu-3.1-test.ts"
+                }
+              ]
+            },
+            "vm3": {
+              "fileReplacements": [
+                {
+                  "replace": "./environments/environment.ts",
+                  "with": "./environments/environment.den-dev-cdh-3.ts"
+                }
+              ]
+            },
+            "vm14": {
+              "fileReplacements": [
+                {
+                  "replace": "./environments/environment.ts",
+                  "with": "./environments/environment.den-dev-cdh-14.ts"
+                }
+              ]
+            },
+            "vm21": {
+              "fileReplacements": [
+                {
+                  "replace": "./environments/environment.ts",
+                  "with": "./environments/environment.atx-dev-cdh-21.ts"
+                }
+              ]
+            },
+            "vm3XXX": {
+              "fileReplacements": [
+                {
+                  "replace": "./environments/environment.ts",
+                  "with": "./environments/environment.den-dev-cdh-3XXX.ts"
+                }
+              ]
+            },
+            "vm7": {
+              "fileReplacements": [
+                {
+                  "replace": "./environments/environment.ts",
+                  "with": "./environments/environment.den-dev-cdh-7.ts"
+                }
+              ]
+            },
+            "docker": {
+              "fileReplacements": [
+                {
+                  "replace": "./environments/environment.ts",
+                  "with": "./environments/environment.docker.ts"
                 }
               ]
             }
@@ -62,44 +165,96 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "clean-nrwl:build"
+            "browserTarget": "fox-angular-cli:build",
+            "port": 5555
           },
           "configurations": {
             "production": {
-              "browserTarget": "clean-nrwl:build:production"
+              "browserTarget": "fox-angular-cli:build:production"
+            },
+            "test": {
+              "browserTarget": "fox-angular-cli:build:test"
+            },
+            "dev": {
+              "browserTarget": "fox-angular-cli:build:dev"
+            },
+            "vm1": {
+              "browserTarget": "fox-angular-cli:build:vm1"
+            },
+            "vm1-lite": {
+              "browserTarget": "fox-angular-cli:build:vm1-lite"
+            },
+            "vm1-hmr": {
+              "browserTarget": "fox-angular-cli:build:vm1-hmr"
+            },
+            "gluu": {
+              "browserTarget": "fox-angular-cli:build:gluu"
+            },
+            "vm3": {
+              "browserTarget": "fox-angular-cli:build:vm3"
+            },
+            "vm14": {
+              "browserTarget": "fox-angular-cli:build:vm14"
+            },
+            "vm21": {
+              "browserTarget": "fox-angular-cli:build:vm21"
+            },
+            "vm3XXX": {
+              "browserTarget": "fox-angular-cli:build:vm3XXX"
+            },
+            "vm7": {
+              "browserTarget": "fox-angular-cli:build:vm7"
+            },
+            "docker": {
+              "browserTarget": "fox-angular-cli:build:docker"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "clean-nrwl:build"
+            "browserTarget": "fox-angular-cli:build"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "src/tsconfig.spec.json",
-            "karmaConfig": "src/karma.conf.js",
-            "styles": [
-              "src/styles.scss"
-            ],
+            "main": "test.ts",
+            "karmaConfig": "karma.conf.js",
+            "polyfills": "polyfills.ts",
+            "tsConfig": "tsconfig.spec.json",
             "scripts": [],
+            "styles": [
+              "styles.scss",
+              "assets/FoxIcomoonIcons.css",
+              "assets/normalize.css",
+              "assets/eot.css",
+              "assets/woff.css",
+              "assets/woff2.css"
+            ],
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              "assets",
+              "favicon.ico",
+              "FoxIcons.woff2",
+              "CFLogo_Dark.png",
+              "caret.svg",
+              {
+                "glob": "**/*",
+                "input": "fonts",
+                "output": "/assets/fonts"
+              },
+              {
+                "glob": "**/*",
+                "input": "FoxIcons.woff2",
+                "output": "/fonts"
+              }
             ]
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "src/tsconfig.app.json",
-              "src/tsconfig.spec.json"
-            ],
+            "tsConfig": ["tsconfig.app.json", "tsconfig.spec.json"],
             "exclude": [
               "**/node_modules/**"
             ]
@@ -108,5 +263,14 @@
       }
     }
   },
-  "defaultProject": "clean-nrwl"
+  "defaultProject": "fox-angular-cli",
+  "schematics": {
+    "@schematics/angular:component": {
+      "prefix": "app",
+      "styleext": "scss"
+    },
+    "@schematics/angular:directive": {
+      "prefix": "app"
+    }
+  }
 }
